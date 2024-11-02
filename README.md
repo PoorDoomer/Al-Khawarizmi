@@ -158,7 +158,7 @@ Contributions are welcome! Please follow these steps:
 4. Open a pull request against the main branch
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under a license hhh
 
 ## Acknowledgments
 - **chardet**: Universal encoding detector used for handling file encodings
