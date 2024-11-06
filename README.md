@@ -154,9 +154,7 @@ We welcome contributions! Please follow these steps:
 2. Create a feature branch
 3. Commit your changes
 4. Push to the branch
-5. Open a Pull Request
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## 📄 License
 
@@ -168,11 +166,6 @@ This project is licensed under a do whatever you want just credit me and dont do
 - [Chardet](https://github.com/chardet/chardet) - Character encoding detection
 - Python Community - Continuous support and inspiration
 
-## 📞 Support
-
-- 📧 Email: support@alkhawarizmi.dev
-- 💬 Discord: [Join our community](https://discord.gg/alkhawarizmi)
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/Al-Khawarizmi/issues)
 
 ---
 
