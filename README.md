@@ -1,166 +1,185 @@
-# Project2Text
+```text
+|____ | | | | / / |     /   | |  | |          /  |              /  | 
+    / / | | |/ /| |__  / /| | |  | | __ _ _ __`| | _____ __ ___ `| | 
+    \ \ | |    \| '_ \/ /_| | |/\| |/ _` | '__|| ||_  / '_ ` _ \ | | 
+.___/ / | | |\  \ | | \___  \  /\  / (_| | |  _| |_/ /| | | | | || |_
+\____/|_| \_| \_/_| |_|   |_/\/  \/ \__,_|_|  \___/___|_| |_| |_\___/
 
-Project2Text is a versatile command-line tool that compiles all text-based files in a project directory into a single or multiple output files. It supports various output formats, handles large projects efficiently with multi-threading, and provides extensive customization options.
+# Al Khawarizmi
 
-## Table of Contents
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Command-Line Arguments](#command-line-arguments)
-- [Examples](#examples)
-- [Output Formats](#output-formats)
-- [Limitations](#limitations)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
+> A powerful CLI tool for compiling and analyzing project files with AI-powered insights
 
-## Features
-- **Multi-threading**: Processes files concurrently to improve performance on large projects
-- **Customizable Output**: Supports Markdown, HTML, and JSON formats
-- **File Inclusion/Exclusion**: Include or exclude files based on extensions, patterns, or specific names
-- **Ignore Patterns**: Exclude files or directories using glob patterns
-- **Size Limitation**: Split output into multiple files if a size limit is exceeded
-- **Token Counting**: Counts the number of tokens (words) in the output files
-- **Metadata Inclusion**: Optionally include file metadata such as size, last modified date, creation time, permissions, and owner
-- **Custom Markers**: Customize start and end markers for file content
-- **ASCII Tree Generation**: Generates an ASCII tree representation of the project directory
-- **Progress Indicators**: Displays a progress bar during file processing
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-## Installation
+## 🌟 Features
+
+### Core Features
+- 🚀 **Wizard-style CLI**: Interactive setup process for ease of use
+- 🧵 **Multi-threading**: Concurrent file processing for optimal performance
+- 📝 **Multiple Output Formats**: Support for Markdown, HTML, and JSON
+- 🎯 **Smart Filtering**: Flexible file inclusion/exclusion patterns
+- 📊 **Progress Tracking**: Real-time progress indicators
+- 🌳 **Directory Visualization**: ASCII tree representation of project structure
+- 📏 **Size Management**: Automatic file splitting based on size limits
+
+### AI-Powered Features (Coming Soon)
+- 🤖 **Code Analysis**: Detect code smells and suggest improvements
+- 📚 **Documentation Generation**: Auto-generate comprehensive documentation
+- 🔒 **Security Scanning**: Identify potential security vulnerabilities
+- 📦 **Dependency Analysis**: Analyze and optimize project dependencies
+
+## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.6 or higher
+- Python 3.7 or higher
+- pip package manager
 
-### Install Required Libraries
-Install the necessary Python libraries using pip:
+### Installation
+
+1. Clone the repository:
 ```bash
-pip install chardet tqdm
+git clone https://github.com/yourusername/Al-Khawarizmi.git
+cd Al-Khawarizmi
 ```
 
-### Clone the Repository
+2. Install required dependencies:
 ```bash
-git clone https://github.com/yourusername/Project2Text.git
-cd Project2Text
+pip install -r requirements.txt
 ```
-
-## Usage
-The script can be run directly from the command line:
-```bash
-python project2text.py [options]
-```
-
-## Command-Line Arguments
-```plaintext
-positional arguments:
-  dir_path              The directory to scan.
-                        Default is the current working directory.
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -o OUTPUT, --output OUTPUT
-                        Output file name. Default is "project_files.md".
-  --format {markdown,html,json}
-                        Output file format. Choices are markdown, html, json.
-                        Default is "markdown".
-  --include [INCLUDE [INCLUDE ...]]
-                        File extensions to include (e.g., .py .txt).
-  --exclude [EXCLUDE [EXCLUDE ...]]
-                        File extensions to exclude (e.g., .exe .dll).
-  --exclude-dirs [EXCLUDE_DIRS [EXCLUDE_DIRS ...]]
-                        Directories to exclude (default: .git, __pycache__,
-                        node_modules).
-  --exclude-files [EXCLUDE_FILES [EXCLUDE_FILES ...]]
-                        Files to exclude (e.g., secrets.txt).
-  --pattern-include [PATTERN_INCLUDE [PATTERN_INCLUDE ...]]
-                        Patterns to include (e.g., *.py test_*.txt).
-  --pattern-exclude [PATTERN_EXCLUDE [PATTERN_EXCLUDE ...]]
-                        Patterns to exclude (e.g., *.log temp_*).
-  --ignore [IGNORE [IGNORE ...]]
-                        Files or directories to ignore (supports glob
-                        patterns, e.g., folder/*, file.txt).
-  --start-marker START_MARKER
-                        Custom start marker for file content.
-  --end-marker END_MARKER
-                        Custom end marker for file content.
-  --no-metadata         Exclude file metadata from the output.
-  --limit LIMIT         Maximum size (in bytes) for each output file. If
-                        exceeded, additional files are created.
-```
-
-## Examples
 
 ### Basic Usage
-Compile all files in the current directory into project_files.md:
+
+Run the CLI wizard:
 ```bash
-python project2text.py
+python main.py
 ```
 
-### Specify Directory and Output Format
-Compile files from a specific directory and output in HTML format:
-```bash
-python project2text.py "/path/to/project" --format html -o project_files.html
+## 🎯 Examples
+
+### Basic File Compilation
+```python
+from cli import ProjectTextCLI
+
+if __name__ == '__main__':
+    cli = ProjectTextCLI()
+    cli.run()
 ```
 
-### Include Specific File Extensions
-Include only .py and .txt files:
-```bash
-python project2text.py --include .py .txt
+### Custom Configuration
+```python
+# Initialize with specific settings
+cli = ProjectTextCLI()
+cli.dir_path = "/path/to/project"
+cli.output_format = "markdown"
+cli.run()
 ```
 
-### Exclude Specific Directories and Files
-Exclude .git directory and config.yaml file:
-```bash
-python project2text.py --exclude-dirs .git --exclude-files config.yaml
-```
+## 🛠️ Configuration Options
 
-### Use Ignore Patterns
-Ignore all files in logs/ directory and files ending with .log:
-```bash
-python project2text.py --ignore "logs/*" "*.log"
-```
+### File Filtering
+- **Extensions**: Include/exclude specific file types
+- **Directories**: Exclude specific directories
+- **Patterns**: Use glob patterns for precise filtering
+- **Ignore Rules**: Define comprehensive ignore patterns
 
-### Limit Output File Size
-Set a maximum output file size of 1 MB (1,048,576 bytes):
-```bash
-python project2text.py --limit 1048576
-```
+### Output Customization
+- **Format Selection**: Choose between Markdown, HTML, or JSON
+- **Custom Markers**: Define custom start/end markers
+- **Metadata Control**: Include/exclude file metadata
+- **Size Limits**: Set maximum output file sizes
 
-## Output Formats
+## 🤖 AI Agents (Coming Soon)
+
+### Available Agents
+1. **Code Analyzer**
+   - Code smell detection
+   - Complexity analysis
+   - Best practices checking
+   - Performance optimization suggestions
+
+2. **Documentation Generator**
+   - Function documentation
+   - API documentation
+   - Usage examples
+   - README generation
+
+3. **Security Scanner**
+   - Vulnerability detection
+   - Security best practices
+   - Dependency security check
+   - OWASP compliance check
+
+4. **Dependency Analyzer**
+   - Dependency graph generation
+   - Version conflict detection
+   - Update recommendations
+   - Unused dependency detection
+
+## 📝 Output Formats
 
 ### Markdown (Default)
-Outputs a .md file with:
-- ASCII tree of the project directory
-- Concatenated file contents with customizable markers
-- Optional inclusion of file metadata
+```markdown
+=== Start of example.py ===
+File content here...
+=== End of example.py ===
+```
 
 ### HTML
-Outputs a .html file with:
-- Proper HTML structure and headings
-- File contents displayed within `<pre>` tags
-- ASCII tree and file metadata included
+```html
+<h2>example.py</h2>
+<pre>
+File content here...
+</pre>
+```
 
 ### JSON
-Outputs a .json file with:
-- JSON object containing the ASCII tree and file contents
-- File metadata included in the JSON structure
+```json
+{
+  "file": "example.py",
+  "content": "File content here...",
+  "metadata": {
+    "size": "1024 bytes",
+    "modified": "2024-11-06 10:00:00"
+  }
+}
+```
 
-## Limitations
-- **Binary Files**: Binary files are automatically skipped to prevent unreadable content
-- **Encoding**: The script attempts to read files using their detected encoding but may fail for files with unknown encodings
-- **Permissions**: On some operating systems, file owner information may not be accurate
-- **Token Counting**: Token counting is approximate, based on splitting text by whitespace
+## 🚧 Limitations
 
-## Contributing
-Contributions are welcome! Please follow these steps:
+- Binary files are automatically skipped
+- File encoding detection may vary
+- OS-specific file owner information
+- Approximate token counting
+- AI features currently in development
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+
 1. Fork the repository
-2. Create a new branch for your feature or bug fix
-3. Commit your changes with descriptive messages
-4. Open a pull request against the main branch
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
 
-## License
-This project is licensed under a license hhh
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
-## Acknowledgments
-- **chardet**: Universal encoding detector used for handling file encodings
-- **tqdm**: Provides progress bars for long-running operations
-- **Python Community**: For the extensive resources and support
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Rich](https://github.com/Textualize/rich) - Beautiful terminal formatting
+- [Chardet](https://github.com/chardet/chardet) - Character encoding detection
+- Python Community - Continuous support and inspiration
+
+## 📞 Support
+
+- 📧 Email: support@alkhawarizmi.dev
+- 💬 Discord: [Join our community](https://discord.gg/alkhawarizmi)
+- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/Al-Khawarizmi/issues)
+
+---
+
+Made with ❤️ by wa7d Bnadm/PoorDoomer
