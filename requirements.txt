@@ -1,0 +1,3 @@
+rich
+chardet
+python-dotenv
