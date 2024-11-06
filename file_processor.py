@@ -31,7 +31,9 @@ def compile_project_files(
         end_marker,
         no_metadata,
         limit_size,
-        console: Console
+        progress,
+        console: Console,
+        task_id=None  # Added task_id parameter with default None
     ):
     """Compiles project files into a single text file based on provided arguments"""
 
@@ -39,11 +41,22 @@ def compile_project_files(
     if not os.path.isdir(dir_path):
         console.print(f"[red]The directory '{dir_path}' does not exist.[/red]")
         sys.exit(1)
-
+  # Validate and adjust file extension based on format
+    extension_map = {
+        'markdown': '.md',
+        'html': '.html',
+        'json': '.json'
+    }
     markers = {
         'start': start_marker,
         'end': end_marker
     }
+    base_name = os.path.splitext(output_filename)[0]
+    correct_extension = extension_map.get(output_format)
+    
+    if correct_extension:
+        output_filename = f"{base_name}{correct_extension}"
+        console.print(f"Output will be saved as: {output_filename}")
 
     metadata_options = {
         'File Size': not no_metadata,
@@ -95,10 +108,11 @@ def compile_project_files(
 
         # Process files with multi-threading and a progress bar
         with ThreadPoolExecutor() as executor:
-            with Progress(console=console) as progress:
-                task = progress.add_task("[cyan]Processing files...", total=len(file_list))
                 for _ in executor.map(process_file_wrapper, file_list):
-                    progress.update(task, advance=1)
+                    files_processed += 1
+                    if task_id is not None:
+                        # Update progress based on percentage of files processed
+                        progress.update(task_id, completed=(files_processed / total_files) * 100)
 
         # Get the list of output files generated
         output_files = [f"{os.path.splitext(output_filename)[0]}_{i}{os.path.splitext(output_filename)[1]}" for i in range(1, file_counter['count'] + 1)]

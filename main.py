@@ -1,5 +1,5 @@
-from cli import ProjectTextCLI
+from cli import Project2TextCLI
 
 if __name__ == '__main__':
-    cli = ProjectTextCLI()
+    cli = Project2TextCLI()
     cli.run()

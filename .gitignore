@@ -1,2 +1,8 @@
 compile_project.log
 project_files_1.md
+epubdownloader_1
+project2text.log
+smart_processor.log
+__pycache__/*
+smart_processed/analysis_summary.json
+smart_processed/*
