@@ -15,7 +15,6 @@ from rich.progress import Progress
 
 # Lock for writing to the output file
 write_lock = threading.Lock()
-
 def compile_project_files(
         dir_path,
         output_filename,
@@ -41,7 +40,8 @@ def compile_project_files(
     if not os.path.isdir(dir_path):
         console.print(f"[red]The directory '{dir_path}' does not exist.[/red]")
         sys.exit(1)
-  # Validate and adjust file extension based on format
+        
+    # Validate and adjust file extension based on format
     extension_map = {
         'markdown': '.md',
         'html': '.html',
@@ -106,13 +106,17 @@ def compile_project_files(
 
                 file_list.append((file_path, relative_path, output_format, markers, metadata_options, output_filename, limit_size, file_counter))
 
+        # Initialize counters for progress tracking
+        total_files = len(file_list)
+        files_processed = 0  # Added initialization of files_processed
+
         # Process files with multi-threading and a progress bar
         with ThreadPoolExecutor() as executor:
-                for _ in executor.map(process_file_wrapper, file_list):
-                    files_processed += 1
-                    if task_id is not None:
-                        # Update progress based on percentage of files processed
-                        progress.update(task_id, completed=(files_processed / total_files) * 100)
+            for _ in executor.map(process_file_wrapper, file_list):
+                files_processed += 1
+                if task_id is not None:
+                    # Update progress based on percentage of files processed
+                    progress.update(task_id, completed=(files_processed / total_files) * 100)
 
         # Get the list of output files generated
         output_files = [f"{os.path.splitext(output_filename)[0]}_{i}{os.path.splitext(output_filename)[1]}" for i in range(1, file_counter['count'] + 1)]
