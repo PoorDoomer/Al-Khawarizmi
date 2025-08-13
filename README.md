@@ -32,7 +32,7 @@
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/Al-Khawarizmi.git
+git clone https://github.com/PoorDoomer/Al-Khawarizmi.git
 cd Al-Khawarizmi
 ```
 
